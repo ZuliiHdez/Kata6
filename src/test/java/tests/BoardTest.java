@@ -1,8 +1,9 @@
-package software.ulpgc.kata4;
+package tests;
 
 import org.junit.Test;
 import software.ulpgc.kata6.Board;
 
+import static tests.BoardTest.Cases.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class BoardTest {
@@ -25,6 +26,26 @@ public class BoardTest {
 
     @Test
     public void should_return_board_2x2_with_all_alive_cells_given_board_2x2_with_all_alive_cells(){
+       String state = new Board(board_2x2_all_alive_cells).next().state();
+       assertThat(state).isEqualTo(board_2x2_all_alive_cells);
+    }
+
+    @Test
+    public void should_return_board_2x2_with_all_dead_cells_given_board_2x2_with_on_alive_cell(){
+        String state = new Board(board_2x2_with_on_alive_cell).next().state();
+        assertThat(state).isEqualTo(board_22_all_dead_cells);
+    }
+
+    @Test
+    public void should_return_board_2x2_all_alive_cells_given_board_2x2_with_triangle_structure(){
+        String state = new Board(board_2x2_with_triangle_strcuture).next().state();
+        assertThat(state).isEqualTo(board_2x2_all_alive_cells);
+    }
+
+    @Test
+    public void should_return_board_3x3_with_alive_cells_in_corners_given_board_3x3_with_all_alive_cells(){
+        String state = new Board(board_3x3_with_all_alive_cells).next().state();
+        assertThat(state).isEqualTo(board_3x3_with_alive_cells_in_corners);
     }
 
     public static class Cases {
@@ -51,7 +72,7 @@ public class BoardTest {
                 """.trim();
         public static final String board_3x3_with_alive_cells_in_corners = """
                 X.X
-                ..
+                ...
                 X.X
                 """.trim();
     }
